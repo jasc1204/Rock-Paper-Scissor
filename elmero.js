@@ -7,11 +7,11 @@ function getComputerChoice()
 {
     let option = Math.random();
 
-    if(option > (1/3))
-        return "SCISSOR";
-
-    else if (option > (1/3) && option < (2/3))
+    if (option > 0 && option < (1/3))
         return "ROCK";
+
+    else if(option > (1/3) && option < (2/3))
+        return "SCISSOR";
 
     else 
         return "PAPER";
@@ -35,24 +35,34 @@ function playRound(humanChoice,computerChoice)
     {
         console.log("computer WINNNNNNNNNNS!");
         computerScore++;
+        console.log("Human Score: " + humanScore + " Computer Score: " + computerScore);
+
     }
     
     else if (human == "PAPER" && computer == "SCISSOR")
     {
         console.log("computer WINNNNNNNNNNS!"); 
         computerScore++;
+        console.log("Human Score: " + humanScore + " Computer Score: " + computerScore);
+
     }
 
     else if (human == "ROCK" && computer == "PAPER")
     {
         console.log("computer WINNNNNNNNNNS!"); 
         computerScore++;
+        console.log("Human Score: " + humanScore +" Computer Score: " + computerScore);
+
     }
 
+    else if (human == computer)
+        console.log("Draw!!!");
     else
     {
         console.log("YOU WINNNNNNNNNN!"); 
-        humanScore++;        
+        humanScore++;     
+        console.log("Human Score: " + humanScore + " Computer Score: " + computerScore);
+   
     }
             
 }
@@ -61,6 +71,11 @@ function playGame()
 {
     for(let i = 0; i < 5; i++)
         playRound(getHumanChoice(),getComputerChoice());
+
+    if (humanScore > computerScore)
+        console.log("Human Wins!");
+    else
+        console.log("Computer Wins!");
 }
 
 playGame();
