@@ -1,6 +1,9 @@
 let humanScore = 0;
 let computerScore = 0;
 
+const result = document.getElementById("result");
+const response = document.getElementById("response");
+
 
 
 function getComputerChoice()
@@ -18,14 +21,6 @@ function getComputerChoice()
 
 }
 
-
-function getHumanChoice()
-{
-    let option = prompt("What is your choice?");
-    console.log(option);
-    return option;
-}
-
 function playRound(humanChoice,computerChoice)
 {
     let human = humanChoice.toUpperCase();
@@ -33,50 +28,68 @@ function playRound(humanChoice,computerChoice)
 
     if(human == "SCISSOR" && computer == "ROCK")
     {
-        console.log("computer WINNNNNNNNNNS!");
         computerScore++;
-        console.log("Human Score: " + humanScore + " Computer Score: " + computerScore);
+        response.textContent= "Human Score: " + humanScore + " Computer Score: " + computerScore;
 
     }
     
     else if (human == "PAPER" && computer == "SCISSOR")
     {
-        console.log("computer WINNNNNNNNNNS!"); 
         computerScore++;
-        console.log("Human Score: " + humanScore + " Computer Score: " + computerScore);
+        response.textContent= "Human Score: " + humanScore + " Computer Score: " + computerScore;
 
     }
 
     else if (human == "ROCK" && computer == "PAPER")
     {
-        console.log("computer WINNNNNNNNNNS!"); 
         computerScore++;
-        console.log("Human Score: " + humanScore +" Computer Score: " + computerScore);
+        response.textContent= "Human Score: " + humanScore + " Computer Score: " + computerScore;
 
     }
 
     else if (human == computer)
-        console.log("Draw!!!");
+        response.textContent= "Human Score: " + humanScore + " Computer Score: " + computerScore;
     else
     {
-        console.log("YOU WINNNNNNNNNN!"); 
         humanScore++;     
-        console.log("Human Score: " + humanScore + " Computer Score: " + computerScore);
+        response.textContent= "Human Score: " + humanScore + " Computer Score: " + computerScore;
    
     }
             
 }
 
-function playGame()
+function playGame(name)
 {
-    for(let i = 0; i < 5; i++)
-        playRound(getHumanChoice(),getComputerChoice());
 
-    if (humanScore > computerScore)
-        console.log("Human Wins!");
-    else
-        console.log("Computer Wins!");
+    playRound(name,getComputerChoice());
+
+    console.log()
+
+    if (humanScore == 5)
+    {
+        result.textContent = " Human wins";
+        humanScore = 0;
+        computerScore = 0;
+
+    }
+    else if (computerScore == 5)
+    {
+        result.textContent = " Computer wins";
+        humanScore = 0;
+        computerScore = 0;
+    }
 }
 
-playGame();
+const buttons = document.querySelectorAll("button");
+
+buttons.forEach(button =>{
+    button.addEventListener("click",function(e){
+        if(humanScore == 0 && computerScore == 0)
+            result.textContent = "";
+        const name = e.target.getAttribute("data-name");
+        playGame(name)
+    });
+});
+
+
 
